@@ -3,6 +3,19 @@ label {
   margin-top: 10px;
 }
 
+.form-group-checkbox {
+  margin-top: 10px;
+  margin-left: 0px;
+}
+
+.form-group-label-checkbox {
+  padding-left: 6px;
+}
+
+.img-logo-login {
+  width: 72%;
+}
+
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;

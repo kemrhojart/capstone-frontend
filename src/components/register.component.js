@@ -3,6 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import { Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -124,11 +125,15 @@ export default class Register extends Component {
     return (
       <div className="col-md-12">
         <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
+          <div className="mb-3">
+            <h1 className="h3">Sign In</h1>
+            <p className="lead mb-0">
+              Already a member?{" "}
+              <Link to={"/login"}>
+                Log In
+              </Link>
+            </p>
+          </div>
 
           <Form
             onSubmit={this.handleRegister}
@@ -139,11 +144,11 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
                   <Input
                     type="text"
                     className="form-control"
                     name="username"
+                    placeholder="username"
                     value={this.state.username}
                     onChange={this.onChangeUsername}
                     validations={[required, vusername]}
@@ -151,11 +156,11 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
                   <Input
                     type="text"
                     className="form-control"
                     name="email"
+                    placeholder="Email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                     validations={[required, email]}
@@ -163,11 +168,11 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
                   <Input
                     type="password"
                     className="form-control"
                     name="password"
+                    placeholder="Enter password"
                     value={this.state.password}
                     onChange={this.onChangePassword}
                     validations={[required, vpassword]}

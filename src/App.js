@@ -5,12 +5,12 @@ import "./App.css";
 
 import AuthService from "./services/auth.service";
 
+import NavbarLogo from "./components/navbar-logo.component"
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 
 // import AuthVerify from "./common/auth-verify";
@@ -22,7 +22,6 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
     };
@@ -34,7 +33,6 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
@@ -51,51 +49,23 @@ class App extends Component {
   logOut() {
     AuthService.logout();
     this.setState({
-      showModeratorBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
     });
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser, showAdminBoard } = this.state;
 
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-            Capstone
-          </Link>
+          
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
+              <NavbarLogo />
             </li>
-
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-            )}
+            
           </div>
 
           {currentUser ? (
@@ -113,17 +83,11 @@ class App extends Component {
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
-              <li className="nav-item">
+              
                 <Link to={"/login"} className="nav-link">
                   Login
                 </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
+              
             </div>
           )}
         </nav>
@@ -136,12 +100,10 @@ class App extends Component {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
-            <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>
         </div>
 
-        {/* <AuthVerify logOut={this.logOut}/> */}
       </div>
     );
   }
