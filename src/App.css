@@ -7,6 +7,46 @@ label {
   margin-top: 10px;
 }
 
+.board {
+  min-height: 300px;
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.board-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.board-square {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.board-tracking {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  margin: 20px 30px 0 30px;
+  margin-top: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  min-height: 400px;
+}
+
 .form-group-checkbox {
   margin-top: 10px;
   margin-left: 0px;
@@ -17,7 +57,21 @@ label {
 }
 
 .img-logo-login {
-  width: 72%;
+  width: 50%;
+}
+
+.img-logo-navbar {
+  width: 50%;
+}
+
+.navbar {
+  background-color: #17473E;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #449183;
+  border-color: #449183;
 }
 
 .card-container.card {

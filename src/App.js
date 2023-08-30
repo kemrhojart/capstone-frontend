@@ -60,7 +60,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark navbar">
           
           <div className="navbar-nav mr-auto">
             <li className="nav-item">

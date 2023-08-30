@@ -13,8 +13,8 @@ export default class navbarLogo extends Component {
 
     render() {
         return (
-            <div className="btn btn-xs btn-icon">
-                <a href="/home"><img src={Logo} alt="Logo" /></a>
+            <div className="btn btn-xs btn-icon ">
+                <a href="/home"><img src={Logo} alt="Logo" className="img-logo-navbar" /></a>
                 
             </div>
         );
