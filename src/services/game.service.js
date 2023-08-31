@@ -13,13 +13,10 @@ class GameService {
     return axios.get(API_URL + 'juegos', config);
   }
 
-  /*newGame(tipo) {
-    return axios.post(API_URL + "juego_nuevo", {
-     { tipo }
-    }
+  newGame(tipo) {
     
-    );
-  }*/
+    return axios.post(API_URL + "juego_nuevo", { tipo }, { headers: authHeader() });
+  }
 
 }
 

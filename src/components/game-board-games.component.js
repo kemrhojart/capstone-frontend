@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import GameService from "../services/game.service";
 
-const GameBoardGames = ({boardType}) => {
+const GameBoardGames = ({boardType, setIdGame}) => {
     const [games, setGames] = useState([]);
+
+    const newGame = (type) => {
+        GameService.newGame(type.boardType)
+        .then(response => {
+            fetchGame();
+            setIdGame('1');
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
     
     const fetchGame = () => {
-        console.log({boardType});
         GameService.getAllAvalaibleGames({boardType})
         .then(response => {
             if(response.data.length > 0) {
@@ -21,6 +31,11 @@ const GameBoardGames = ({boardType}) => {
         fetchGame();
     }, [])
 
+    // Function to get cell value
+    const getCellValue = (cell) => {
+        setIdGame(cell.id_juego)
+    }
+
     return <>
         <div className="card">
                 <div className="card-header">
@@ -31,17 +46,28 @@ const GameBoardGames = ({boardType}) => {
                 <table className="table-hover">
                     <tbody>
                         {games.map((element, index) => {
-                            console.log("Proabdo");
-                
                             return (
-                                <tr key={index}>
-                                    <td>Juego No {element.id_juego} (0) - {element.estado}</td>
+                                <tr key={index}
+                                    onClick={() => {
+                                        getCellValue(element);
+                                    }}>
+                                    <td>
+                                        Juego No {element.id_juego} (0) - {element.estado}
+                                    </td>
                                 </tr>
                             )
                         })}
                     </tbody>
                 </table>
         </div>
+            <div className="form-group">
+                <button className="btn btn-primary"
+                    onClick={() => {
+                        console.log({boardType});
+                        newGame({boardType})
+                    }}>New
+                </button>
+            </div>
     </>   
 }
 
