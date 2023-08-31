@@ -51,7 +51,7 @@ function Board () {
     );
 }
 
-class GameBoard extends Component {
+class GameBoard extends Component {    
     render() {
         return (
             <div className="">

@@ -68,10 +68,8 @@ label {
   background-color: #17473E;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #449183;
-  border-color: #449183;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #449183 !important;
 }
 
 .card-container.card {

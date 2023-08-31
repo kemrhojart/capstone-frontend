@@ -1,32 +1,48 @@
-import React, { Component } from "react";
-import { withRouter } from '../common/with-router';
+import { useEffect, useState } from "react";
+import GameService from "../services/game.service";
 
-class GameBoardGames extends Component {
- 
-    render() {
-        return (
-            <div className="card">
+const GameBoardGames = ({boardType}) => {
+    const [games, setGames] = useState([]);
+    
+    const fetchGame = () => {
+        console.log({boardType});
+        GameService.getAllAvalaibleGames({boardType})
+        .then(response => {
+            if(response.data.length > 0) {
+                setGames(response.data);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    useEffect(() => {
+        fetchGame();
+    }, [])
+
+    return <>
+        <div className="card">
                 <div className="card-header">
                     <h2 className="text-center">
-                    Board 5 x 5
+                    Board {boardType}
                     </h2>
                 </div>                    
                 <table className="table-hover">
                     <tbody>
-                        <tr>
-                            <td>Juego 1675 (1) - Abierto</td>
-                        </tr>
-                        <tr>
-                            <td>Juego 8025 (2) - Iniciando</td>
-                        </tr>
-                        <tr>
-                            <td>Juego 9001 (0)</td>
-                        </tr>
+                        {games.map((element, index) => {
+                            console.log("Proabdo");
+                
+                            return (
+                                <tr key={index}>
+                                    <td>Juego No {element.id_juego} (0) - {element.estado}</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
-            </div>
-        );
-    }
+        </div>
+    </>   
 }
 
-export default withRouter(GameBoardGames);
+export default GameBoardGames;
