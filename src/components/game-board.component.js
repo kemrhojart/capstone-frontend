@@ -1,12 +1,17 @@
 import React  from "react";
 
-const GameBoard = (props) => {    
-  const juego = props.juego;
-  const tipo = props.tipo
+const GameBoard = ({juego, tipo, setJugada}) => {    
+  //const juego = juego;
+  //const tipo = tipo
   let words = juego.split(",");
 
   const Square = (props) => {
-    return <button className="board-square">{props.value}</button>
+    const letra = props.value;
+    return <button className="board-square"
+              onClick={() => {
+                console.log(letra)
+                setJugada({letra})}
+                } >{props.value}</button>
   };
 
   const Board = () => {

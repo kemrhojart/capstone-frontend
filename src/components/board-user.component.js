@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 import GameService from "../services/game.service";
 import GameBoard from './game-board.component';
@@ -7,16 +8,15 @@ import GameBoardTracking from './game-board-tracking.component';
 import Timer from './timer.component'
 
 const BoardUser = () => {
+  const [jugada, setJugada] = useState('HOLA');
+  
   const location = useLocation();
   const data = location.state;
-  const jugada = 'prueba'
   const id_jugador = 1
-  const juego = "A,L,A,N,R,E,U,R,F,F,S,I,T,D,S,S,C,A,N,O,T,N,E,N,C"//data.idGame.juego;
+  const juego = data.idGame.juego;
 
   const newJugada = (id_jugador, juego, jugada) => {
-    GameService.newJugada({id_jugador}, {juego}, {jugada})
-    .then(response => {
-    })
+    GameService.newJugada(id_jugador, juego, jugada)
     .catch(function (error) {
       console.log(error);
     });
@@ -38,13 +38,16 @@ const BoardUser = () => {
             <div className="mt-5 col">
                 <GameBoard
                   juego = {data.idGame.juego}
-                  tipo = {data.idGame.tipo}/>
+                  tipo = {data.idGame.tipo}
+                  setJugada = {setJugada}/>
                 <div className="row">
                   <div className="mt-3 form-group col">
                     <input
                       type="text"
                       className="form-control"
                       name="keyWord"
+                      value={jugada}
+                      onChange={(e) => setJugada(e.target.value)}
                       placeholder="Enter a word"
                     />
                     <button className="mt-3 btn btn-primary col"

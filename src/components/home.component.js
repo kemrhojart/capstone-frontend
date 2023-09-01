@@ -1,41 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
+import ImageA from '../images/boggle1.png';
+import { useNavigate } from "react-router-dom";
 
-import UserService from "../services/user.service";
+const Home = () => {
+  const navigate = useNavigate();
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: ""
-    };
-  }
-
-  componentDidMount() {
-    UserService.getPublicContent().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-        </header>
+  return (
+    <div className="container text-center">
+      <div className=" text-center">
+        <h1 className="*text-center">Rules</h1>
       </div>
-    );
-  }
+      <div className="text-center">
+        <img className="img-home" src={ImageA} alt="rules"></img>
+      </div>
+      <div className="text-center mt-3">
+        <button className="btn btn-primary"
+            onClick={() => navigate('/game')}>
+          Play Now!
+        </button>
+      </div>
+    </div>
+  );
 }
+
+export default Home;

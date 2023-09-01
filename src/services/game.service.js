@@ -22,11 +22,12 @@ class GameService {
   }
 
   newJugada(id_jugador, juego, jugada) {
-    console.log(id_jugador.id_jugador)
-    console.log(juego.juego)
-    console.log(jugada.jugada)
-    console.log("entro");
-    return axios.post(API_URL + "jugadas_post", { id_jugador, juego, jugada }, { headers: authHeader() });
+    const data = {
+      id_jugador: id_jugador.id_jugador,
+      juego: juego.juego,
+      jugada: jugada.jugada
+    }
+    return axios.post(API_URL + "jugadas_post", data, { headers: authHeader() });
   }
 
   getListaJugadas(id_juego) {
