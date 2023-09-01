@@ -7,13 +7,15 @@ import GameBoard from './game-board.component';
 import Timer from './timer.component'
 
 const BoardUser = () => {
-  const [jugada, setJugada] = useState('HOLA');
+  const [jugada, setJugada] = useState('');
   const [log, setLog] = useState([]);
   const id_juego = 1;
   
   const location = useLocation();
   const data = location.state;
-  const id_jugador = 1
+  console.log("data")
+  console.log(data);
+  const id_jugador = data.idJugador
   const juego = data.idGame.juego;
 
   const newJugada = (id_jugador, juego, jugada) => {
@@ -25,7 +27,7 @@ const BoardUser = () => {
   }
 
   const fetchLog = () => {
-    GameService.getListaJugadas(id_juego)
+    GameService.getListaJugadas(data.idGame.id_juego)
     .then(response => {
         if(response.data.length > 0) {
           console.log(response.data);

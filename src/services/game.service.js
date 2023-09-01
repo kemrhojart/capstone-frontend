@@ -18,6 +18,11 @@ class GameService {
   }
 
   newJugadorJuego(id_juego, jugador) {
+    const data = {
+      id_juego: id_juego,
+      jugador: jugador
+    }
+    console.log(data);
     return axios.post(API_URL + "jugador_juego", { id_juego, jugador }, { headers: authHeader() });
   }
 
@@ -31,6 +36,8 @@ class GameService {
   }
 
   getListaJugadas(id_juego) {
+    console.log("Service")
+    console.log(id_juego)
     const config = {
       headers: authHeader(),
       params: { id_juego: id_juego}
