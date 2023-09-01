@@ -1,14 +1,15 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import GameService from "../services/game.service";
 import GameBoard from './game-board.component';
-import GameBoardTracking from './game-board-tracking.component';
 import Timer from './timer.component'
 
 const BoardUser = () => {
   const [jugada, setJugada] = useState('HOLA');
+  const [log, setLog] = useState([]);
+  const id_juego = 1;
   
   const location = useLocation();
   const data = location.state;
@@ -17,9 +18,43 @@ const BoardUser = () => {
 
   const newJugada = (id_jugador, juego, jugada) => {
     GameService.newJugada(id_jugador, juego, jugada)
+    .then(fetchLog())
     .catch(function (error) {
       console.log(error);
     });
+  }
+
+  const fetchLog = () => {
+    GameService.getListaJugadas(id_juego)
+    .then(response => {
+        if(response.data.length > 0) {
+          console.log(response.data);
+          setLog(response.data);
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  }
+
+  useEffect(() => {
+    fetchLog();
+  }, [])
+
+  const GameBoardTracking = () => {
+    return (
+      <div className="board-tracking">
+        <table className="table-hover">
+          <tbody>
+            {log.map((element, index) => 
+              <tr key={index}>
+                <td>La palabra "{element.jugada}" {element.observaciones}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    );
   }
 
   return (
