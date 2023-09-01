@@ -1,25 +1,18 @@
-import React, { Component } from "react";
-import { withRouter } from '../common/with-router';
+import React  from "react";
 
 const GameBoard = (props) => {    
-  const a = props.juego;
-  const typeOfGame = "5x5"
-  const words = a.split(",");
-  console.log(words)
+  const juego = props.juego;
+  const tipo = props.tipo
+  let words = juego.split(",");
 
   const Square = (props) => {
     return <button className="board-square">{props.value}</button>
   };
 
   const Board = () => {
+    if (tipo === "5x5") {
     return (
       <div className="container-fluid">
-         {words.map((element, index) => {
-          return (
-            
-            <Square key = {index} value = {element}/>
-          )
-        })}
         <div className="board-row">
           <Square value = {words[0]}/>
           <Square value = {words[1]}/>
@@ -56,7 +49,35 @@ const GameBoard = (props) => {
           <Square value = {words[24]}/>
         </div>
       </div>
+  )} else {return (
+    <div className="container-fluid">
+        <div className="board-row">
+          <Square value = {words[0]}/>
+          <Square value = {words[1]}/>
+          <Square value = {words[2]}/>
+          <Square value = {words[3]}/>
+        </div>
+        <div className="board-row">
+          <Square value = {words[4]}/>
+          <Square value = {words[5]}/>
+          <Square value = {words[6]}/>
+          <Square value = {words[7]}/>
+        </div>
+        <div className="board-row">
+          <Square value = {words[8]}/>
+          <Square value = {words[9]}/>
+          <Square value = {words[10]}/>
+          <Square value = {words[11]}/>
+        </div>
+        <div className="board-row">
+          <Square value = {words[12]}/>
+          <Square value = {words[13]}/>
+          <Square value = {words[14]}/>
+          <Square value = {words[15]}/>
+        </div>
+      </div>
   )}
+}
 
   return (
       <div className="">

@@ -1,32 +1,42 @@
-import React, { Component } from "react";
-import { withRouter } from '../common/with-router';
+import React from "react";
+import { useEffect, useState } from "react";
 
-const log = [];
-log[0] = "Juego iniciado.";
-log[1] = `Jairo ha buscado la palabra "perro"`;
-log[2] = `Jairo obtuvo 0 puntos.`;
-log[3] = `noobmaster acerto 3 puntos`;
-log[4] = `Jairo ha buscado la palabra "res"`;
-log[5] = `Jairo acerto 1 punto`;
-log[6] = `Jairo ha buscado la palabra "cerca"`;
-log[7] = `Jairo obtuvo 0 puntos.`;
+import GameService from "../services/game.service";
 
-class GameBoardTracking extends Component {
-    render() {
-        return (
-        <div className="board-tracking">
-            <table className="table-hover">
-                <tbody>
-                    {log.map((element, index) => 
-                        <tr key={index}>
-                            <td>{element}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-        );
-    }
+const GameBoardTracking = () => {
+  const [log, setLog] = useState([]);
+  const id_juego = 1;
+
+  const fetchLog = () => {
+    GameService.getListaJugadas(id_juego)
+    .then(response => {
+        if(response.data.length > 0) {
+          console.log(response.data);
+          setLog(response.data);
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  }
+
+  useEffect(() => {
+    fetchLog();
+  }, [])
+
+  return (
+    <div className="board-tracking">
+      <table className="table-hover">
+        <tbody>
+          {log.map((element, index) => 
+            <tr key={index}>
+              <td>La palabra "{element.jugada}" {element.observaciones}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-export default withRouter(GameBoardTracking);
+export default GameBoardTracking;
