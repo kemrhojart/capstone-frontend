@@ -31,11 +31,6 @@ const GameBoardGames = ({boardType, setIdGame}) => {
         fetchGame();
     }, [])
 
-    // Function to get cell value
-    const getCellValue = (cell) => {
-        setIdGame(cell.id_juego)
-    }
-
     return <>
         <div className="card">
                 <div className="card-header">
@@ -49,7 +44,7 @@ const GameBoardGames = ({boardType, setIdGame}) => {
                             return (
                                 <tr key={index}
                                     onClick={() => {
-                                        getCellValue(element);
+                                        setIdGame(element);
                                     }}>
                                     <td>
                                         Juego No {element.id_juego} (0) - {element.estado}

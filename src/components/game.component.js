@@ -1,14 +1,16 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import GameBoardGames from './game-board-games.component'
 import Timer from './timer.component'
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 
 const Game = () => {
-    const [idGame, setIdGame] = useState('0');
-    const navigate = useNavigate();
+    const [idGame, setIdGame] = useState({});
 
-    console.log(idGame);
+    const navigate = useNavigate();
+    let data = { idGame: idGame };
+
     return (
         <>
             <div>
@@ -26,7 +28,7 @@ const Game = () => {
             <div className="mt-3">
                 <div className="form-group text-center">
                     <button className="btn btn-primary"
-                        onClick={() => navigate('/user')}>
+                        onClick={() => navigate('/user', { state: data })}>
                         Start
                     </button>
                 </div>
